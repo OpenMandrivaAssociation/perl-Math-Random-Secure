@@ -1,24 +1,24 @@
 %define upstream_name    Math-Random-Secure
 %define upstream_version 0.06
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 2
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	3
 
-Summary:    The underlying PRNG, as an object
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/Math/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	The underlying PRNG, as an object
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/Math/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Any::Moose)
-BuildRequires: perl(Crypt::Random::Source)
-BuildRequires: perl(List::MoreUtils)
-BuildRequires: perl(Math::Random::ISAAC)
-BuildRequires: perl(Test::More)
-BuildRequires: perl(Test::Warn)
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(Any::Moose)
+BuildRequires:	perl(Crypt::Random::Source)
+BuildRequires:	perl(List::MoreUtils)
+BuildRequires:	perl(Math::Random::ISAAC)
+BuildRequires:	perl(Test::More)
+BuildRequires:	perl(Test::Warn)
+BuildArch:	noarch
 
 %description
 This module is intended to provide a cryptographically-secure replacement
@@ -35,24 +35,26 @@ case, means:
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc README Changes LICENSE META.json
 %{_mandir}/man3/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
 
+%changelog
+* Sat Apr 23 2011 Funda Wang <fwang@mandriva.org> 0.60.0-2mdv2011.0
++ Revision: 657789
+- rebuild for updated spec-helper
+
+* Sun Jan 30 2011 Guillaume Rousse <guillomovitch@mandriva.org> 0.60.0-1
++ Revision: 634171
+- import perl-Math-Random-Secure
 
