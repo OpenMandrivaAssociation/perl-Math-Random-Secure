@@ -1,15 +1,13 @@
 %define upstream_name    Math-Random-Secure
-%define upstream_version 0.080001
-
 Name:		perl-%{upstream_name}
-Version:	%{upstream_version}
-Release:	1
+Version:	0.080001
+Release:	2
 
 Summary:	The underlying PRNG, as an object
 License:	GPL+ or Artistic
 Group:		Development/Perl
 Url:		https://github.com/frioux/Math-Random-Secure
-Source0:	https://cpan.metacpan.org/authors/id/F/FR/FREW/Math-Random-Secure-%{upstream_version}.tar.gz
+Source0:	https://cpan.metacpan.org/authors/id/F/FR/FREW/Math-Random-Secure-%{version}.tar.gz
 
 BuildRequires:	make
 BuildRequires:	perl-devel
@@ -33,7 +31,7 @@ case, means:
   seed.
 
 %prep
-%setup -q -n %{upstream_name}-%{upstream_version}
+%setup -q -n %{upstream_name}-%{version}
 
 %build
 perl Makefile.PL INSTALLDIRS=vendor
